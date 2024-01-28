@@ -1,0 +1,82 @@
+{% extends "login.html" %} {% block title %}Registrácia{% endblock %}
+
+
+
+    {% block content %}
+    <section class="login">
+      <div class="login_box">
+  
+        <div class="left">
+          
+          <div>
+            <form method="POST" action="">
+                
+              <h3>Registrácia</h3>
+              <div class="form-group">
+  
+              <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Zadaj email"
+        autocomplete="off"
+      />
+
+      <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      name="firstName"
+      placeholder="Zadaj meno"
+      autocomplete="off"
+    />
+
+               <input
+        type="password"
+        class="form-control"
+        id="password1"
+        name="password1"
+        placeholder="Zadaj heslo"
+      autocomplete="off"
+        
+      />
+      <input
+      type="password"
+      class="form-control"
+      id="password2"
+      name="password2"
+      placeholder="Potvrď heslo"
+      autocomplete="off"
+      
+    />
+
+
+
+
+      <br /> 
+    </div>
+    <button type="submit"  class="button">Vytvoriť Účet</button>
+              
+                  
+            </form>
+            
+            <br /> 
+            <div>Už máte účet?<a href="/login"> Prihlásiť sa</a></div>
+           
+          </div> 
+        </div>
+  
+  
+        <div class="right">
+          <div class="right-text">
+          
+            <h2>OnBudget</h2>
+            <h5>Prehľadná aplikácia na monitorovanie Vášho rozpočtu</h5>
+           
+          </div>
+        
+        </div>
+      </div>
+    </section>
+{% endblock %}

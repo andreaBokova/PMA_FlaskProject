@@ -1,0 +1,71 @@
+
+{% extends 'base.html' %} {% block content %}
+<div class="col-xs-10 col-sm-6 col-md-6 ml-auto mr-auto">
+  <div class="card card-style mb-2">
+    <div class="card-body transaction-form">
+      <form action="{{url_for('views.addTransaction')}}" method="POST">
+        <fieldset class="form-group">
+          <legend class="mb-4">Nová Transakcia</legend>
+
+          <div class="form-group">
+            <label class="inputLabel" for="amount">Suma </label>
+
+            <input
+              type="number"
+              step="0.01"
+              required
+              id="amount"
+              name="amount"
+              autocomplete="off"
+            />
+          </div>
+          <br />
+
+          <div class="categories-box">
+            {% for category in categories %} {% if category.name == 'výdaj' %}
+
+            <label class="transaction-card" for="{{category.type}}">
+              <input
+                type="radio"
+                required
+                name="icon"
+                id="{{category.type}}"
+                value="{{category.type}}|{{category.name}}"
+              />
+
+              <i style="margin-left: 10px" class="{{category.icon}}"></i
+              ><span> {{category.type}}</span></label
+            >
+
+            {% endif %} {% endfor %} {% for category in categories %} {% if
+            category.name == 'príjem' %}
+
+            <label class="transaction-card blue" for="{{category.type}}">
+              <input
+                type="radio"
+                name="icon"
+                id="{{category.type}}"
+                value="{{category.type}}|{{category.name}}"
+              />
+
+              <i style="margin-left: 10px" class="{{category.icon}}"></i
+              ><span> {{category.type}}</span></label
+            >
+
+            {% endif %} {% endfor %}
+          </div>
+
+          <br />
+
+          <br />
+        </fieldset>
+        <div class="form-group pb-3">
+          <button class="wishlist-button" type="submit">Pridať</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br /><br />
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %}Prihlásenie{% endblock %} {% block
+content %}
+<form method="POST">
+  <h3 text-align="center">Prihlásenie</h3>
+  <div class="form-group">
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="Enter password"
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-info">Prihlásiť sa</button>
+</form>
+
+<div class="img-div">
+  <img src="../static/img/login-teal.svg" width="30%" />
+</div>
+
+{% endblock %}

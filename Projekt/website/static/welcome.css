@@ -1,0 +1,135 @@
+body{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+*
+{
+    font-family: 'Nunito Sans', sans-serif; 
+}
+.login {
+    height: 100vh;
+    width: 100vw;
+   background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+    background-image: linear-gradient(to right, #8360c3, #2ebf91);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.login_box {
+    width: 60%;
+    height: 65%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  background:transparent;
+    border-radius: 20px;
+    box-shadow: 10px 10px 55px -3px #0004;
+    display: flex;
+    overflow: hidden;
+}
+.login_box .left{
+  width: 41%;
+  padding: 25px 25px;
+}
+
+.login_box .right{
+  width: 59%;
+}
+
+
+.left {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    height: 100%;
+    width: 73%;
+    margin: auto;
+    background: linear-gradient(135deg, #ffffff 0%, #c3cfe2 70%) !important;
+}
+.left h3{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+ .form-control {
+    margin: 15px 0px;
+   
+}
+
+.form-control:focus{
+  background: linear-gradient(135deg, #ffffff 0%, #c3cfe2 70%);
+  font-size: 1rem;
+}
+
+.button {
+    border: 1px solid teal;
+    padding: 10px 60px;
+    border-radius: 20px;
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: -10px;
+  outline: none;
+    background: teal;
+    color: #fff;
+   
+    -webkit-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    -moz-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    transition: 0.2s;
+}
+
+
+
+.button:hover{
+    background: #8360c3;
+}
+
+
+.right {
+
+    background: linear-gradient(212deg,  rgba(46,191,145, 0.7) 4%, rgba(131,96,195, 0.7) 40%),
+    url('../static/img/bg.jpg');
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+	color: #fff;
+}
+
+
+
+
+.right .right-text{
+  height: 100%;
+ 
+  transform: translate(0%, 45%);
+}
+.right-text h2{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 500;
+}
+.right-text h5{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.logo{
+    width: 30%;
+    margin-bottom: 5%;
+}
+
+a:hover {
+  text-decoration: none !important;
+
+}
+ .button:focus{
+  outline-color: #8360c3;
+}

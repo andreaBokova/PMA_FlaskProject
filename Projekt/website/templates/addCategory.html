@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-xs-10 col-sm-6 col-md-6 ml-auto mr-auto">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <form action="{{url_for('views.addCategory')}}" method="POST">
+                <fieldset class="form-group">
+                    <legend class="mb-4">Nová Kategória</legend>
+                  
+                  <br>
+            
+            
+                    <div class="form-group">
+                       
+                        <label class="inputLabel" for="name" >Názov</label>
+                        
+                        <input type="text" required id="name" name="name" autocomplete="off">
+
+
+                    </div>
+
+                  
+                    
+                    
+            
+
+ 
+
+
+
+                        
+           
+<div class="categories-box">
+
+
+                                            <input type="radio" name="icon" id="home" value="fa-solid fa-house|výdaj">
+                                            <label  for="home"><i class="fa-solid fa-house icons"></i></label>
+                                        
+
+
+                                            <input type="radio" name="icon" id="groceries" value="fa-solid fa-cart-shopping|výdaj">
+                                            <label  for="groceries"><i class="fa-solid fa-cart-shopping icons"></i></label>
+
+                                                <input type="radio" name="icon" id="clothes" value="fa-solid fa-shirt|výdaj">
+                                                <label  for="clothes"><i class="fa-solid fa-shirt icons"></i></label>
+                                           
+
+                                           
+                                                    <input type="radio" name="icon" id="cosmetics" value="fa-solid fa-spray-can-sparkles|výdaj">
+                                                    <label  for="cosmetics"><i class="fa-solid fa-spray-can-sparkles icons"></i></label>
+                                        
+
+
+                                               
+
+                                                
+                                                    <input type="radio" name="icon" id="eatingout" value="fa-solid fa-utensils|výdaj">
+                                                    <label  for="eatingout"><i class="fa-solid fa-utensils icons"></i></label>
+                                                   
+
+                                                    <br>
+                                                        <input type="radio" name="icon" id="health" value="fa-solid fa-pills|výdaj">
+                                                        <label  for="health"><i class="fa-solid fa-pills icons"></i></label>
+                                                    
+                                    
+
+                                                    
+
+                                            
+                                                <input type="radio" name="icon" id="education" value="fa-solid fa-graduation-cap|výdaj">
+                                                <label  for="education"><i class="fa-solid fa-graduation-cap icons"></i></label>
+                                               
+    
+
+                                       
+                                            <input type="radio" name="icon" id="martiniglass" value="fa-solid fa-martini-glass-citrus|výdaj">
+                                            <label  for="martiniglass"><i class="fa-solid fa-martini-glass-citrus icons"></i></label>
+                                            
+
+
+                                         
+                                                <input type="radio" name="icon" id="commute" value="fa-solid fa-bus-simple|výdaj">
+                                                <label  for="commute"><i class="fa-solid fa-bus-simple icons"></i></label>
+                                                
+
+                                                
+                                                    <input type="radio" name="icon" id="travel" value="fa-solid fa-plane|výdaj">
+                                                    <label  for="travel"><i class="fa-solid fa-plane icons"></i></label>
+                                                   
+<br>
+                                                    
+                                                        <input type="radio" name="icon" id="cosmetics" value="fa-solid fa-lightbulb|výdaj">
+                                                        <label  for="energy"><i class="fa-solid fa-lightbulb icons"></i></label>
+                                                       
+
+                                        
+
+
+                                                       
+                                                            <input type="radio" name="icon" id="water" value="fa-solid fa-droplet|výdaj">
+                                                            <label  for="water"><i class="fa-solid fa-droplet icons"></i></label>
+                                                         
+
+                                                            
+
+                                                            
+                                                                <input type="radio" name="icon" id="gas" value="fa-solid fa-gas-pump|výdaj">
+                                                                <label  for="gas"><i class="fa-solid fa-gas-pump icons icons"></i></label>
+                                                                
+
+
+                                                              
+                                                                    <input type="radio" name="icon" id="electronics" value="fa-solid fa-display|výdaj">
+                                                                    <label  for="electronics"><i class="fa-solid fa-display icons"></i></label>
+                                                                    
+    
+
+                                                                   
+                                                                        <input type="radio" name="icon" id="household" value="fa-solid fa-people-roof|výdaj">
+                                                                        <label  for="household"><i class="fa-solid fa-people-roof icons"></i></label>
+                                                                        <br>
+
+                                                                        
+                                                                            <input type="radio" name="icon" id="heating" value="fa-solid fa-temperature-full|výdaj">
+                                                                            <label  for="heating"><i class="fa-solid fa-temperature-full icons"></i></label>
+                                                                         
+
+                                                                       
+
+                                                                    
+                                                           
+                                                                
+
+                                                    <input type="radio" name="icon" id="gift" value="fa-solid fa-gift|výdaj">
+                                                    <label  for="gift"><i class="fa-solid fa-gift icons"></i></label>
+                                                  
+
+                                                
+                                                        <input type="radio" name="icon" id="questionmark" value="fa-solid fa-circle-question|výdaj" checked>
+                                                        <label  for="questionmark"><i class="fa-solid fa-circle-question icons" ></i></label>
+                                                       
+
+
+
+
+                                        <!-- income icons -->
+
+                                        
+                                            <input type="radio" name="icon" id="salary" value="fa-solid fa-hand-holding-dollar|príjem">
+                                            <label  for="salary"><i class="fa-solid fa-hand-holding-dollar icons blue"></i></label>
+                                            
+
+                                    
+                                                <input type="radio" name="icon" id="briefcase" value="fa-solid fa-briefcase|príjem">
+                                                <label  for="briefcase"><i class="fa-solid fa-briefcase icons blue"></i></label>
+                                            
+                                                <br>
+
+                                          
+                                                    <input type="radio" name="icon" id="investment" value="fa-solid fa-money-bill-trend-up|príjem">
+                                                    <label  for="investment"><i class="fa-solid fa-money-bill-trend-up icons blue"></i></label>
+                                                  
+
+
+                                                
+                                               
+                                                    <input type="radio" name="icon" id="gift" value="fa-solid fa-gift|príjem">
+                                                    <label  for="gift"><i class="fa-solid fa-gift icons blue"></i></label>
+                                             
+
+
+
+
+
+                                        
+                                            <input type="radio" name="icon" id="questionmark" value="fa-solid fa-circle-question|príjem">
+                                            <label  for="questionmark"><i class="fa-solid fa-circle-question icons blue"></i></label>
+                                       
+
+
+                                         
+
+
+
+                    </div>
+
+                 <br>
+                   
+                </fieldset> 
+                <div class="form-group pb-3">
+                        <button class='wishlist-button' type="submit">Pridať</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br><br>
+
+    
+{% endblock %}

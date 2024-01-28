@@ -1,0 +1,318 @@
+{% extends "base.html" %} {% block title %}Prehľad{% endblock %} {% block
+content%}
+
+
+<style>h2 {
+    color: black !important;
+}
+
+
+
+    </style>
+
+
+<br id="vydajeView"><br><br><br>
+<div class="screenvh" >
+<div class="rowElements">
+    <div class="chart-container-big right" style="position: relative;">
+        <canvas id="vydaje_chart"></canvas>
+    </div>
+
+    <div class="table-container" style="position: relative; ">
+        
+<div class="table-responsive-small">
+      <div class="table-wrapper">
+    
+
+
+
+
+
+                <div class="table-title">
+                    <div class="row">
+                      <div class="col-sm"><h2>💸 Prehľad výdajov</h2></div>
+                      <div class="col-sm">
+                       
+                       
+                      </div>
+                    </div>
+                  </div>
+
+
+
+        <div class="scrollable-table-small">
+          <table class="table table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Kategória</th>
+
+                <th>Dátum</th>
+
+                <th>Suma</th>
+
+              
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for entry in entries %}  
+              {% if entry.type == 'výdaj' %}
+              <tr>
+               
+
+                <td>
+                 {{ entry.category }}
+                 
+               
+                </td>
+
+                <td>{{entry.date.strftime("%d.%m.%Y")}}</td>
+
+              
+                <td>-{{ entry.amount }} €</td>
+                
+                {% endif %}
+               
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    
+</div> <!-- row elements end here -->
+
+</div><!-- div na celu obrazovku -->
+<!-- second row of elements -->
+
+
+<div class="screenvh">
+    
+<br><br><br><br>
+<div class="rowElements">
+    <div class="chart-container-big right" style="position: relative;">
+        <canvas id="income_vs_category"></canvas>
+    </div>
+
+    <div class="table-container" style="position: relative; ">
+        
+<div class="table-responsive-small">
+      <div class="table-wrapper">
+    
+
+
+
+
+
+                <div class="table-title" id="prijmyView">
+                    <div class="row">
+                      <div class="col-sm" ><h2>💰 Prehľad príjmov</h2></div>
+                    
+                    </div>
+                  </div>
+
+
+
+        <div class="scrollable-table-small">
+          <table class="table table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Kategória</th>
+
+                <th>Dátum</th>
+
+                <th>Suma</th>
+
+            
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for entry in entries %} 
+              {% if entry.type == 'príjem' %}
+              <tr>
+                <td>
+                  {{ entry.category }}
+                </td>
+
+                <td>{{entry.date.strftime("%d.%m.%Y")}}</td>
+
+               
+                <td>+{{ entry.amount }} €</td>
+                
+                {% endif %}
+               
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    
+</div> <!-- second row of elements ends here -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block javascript %}
+<script>
+  //tymto prenastavis default farby 
+  //Chart.defaults.backgroundColor = '#9BD0F5';
+  //Chart.defaults.borderColor = '#36A2EB';
+  Chart.defaults.color = "#fff";
+
+ 
+
+
+
+//grafy extra
+  let income_vs_expense_data = JSON.parse({{ income_vs_expense | tojson }})
+
+  let prijem_vydaj_labely = JSON.parse({{ prijem_vydaj_labels | tojson }})
+  let income_category_data = JSON.parse({{ income_category | tojson}})
+
+  
+  let cat_labels_from_db = JSON.parse({{ cats_labels | tojson}})
+
+  let expense_cat_labels_from_db = JSON.parse({{ expense_cats_labels | tojson }})
+  let expense_category_data = JSON.parse({{ expense_category | tojson }})
+
+  
+  Chart.scaleService.updateScaleDefaults('linear', {
+            ticks: {
+                min: 0,
+               
+            }
+    });
+
+    
+
+  let income_vs_category_chart = new Chart(income_vs_category, {
+          type: 'bar',
+          data: {
+              labels: cat_labels_from_db,
+              datasets: [{
+                  label: "kategórie",
+                  data: income_category_data,
+          backgroundColor: ['skyblue','yellow', '#ff968a',
+              '#B276B2', '#18ffb1', '#FB8267'],
+          borderWidth: 1,
+          hoverBorderColor: "black",
+          hoverBorderWidth: 2,
+          hoverBackgroundColor: 'rgba(154, 245, 140)',
+          pointHoverRadius: 5
+      }],
+          },
+      options: {
+              title: {
+                  display: true,
+                      text: "Príjmy",
+                          fontSize: 20,
+          },
+              legend: {
+                  position: "bottom",
+                      labels: {
+                      fontColor: "gray"
+                  },
+                  display: false,
+          },
+
+              elements: {
+                  hitRadius: 3,
+          }
+          }
+      })
+
+
+
+    //graf na vydaje only
+    let vydaje_stlpcovy_chart = new Chart(vydaje_chart, {
+          type: 'bar',
+          data: {
+              labels: expense_cat_labels_from_db,
+              datasets: [{
+                  label: "kategórie",
+
+                  data: expense_category_data,
+    
+        backgroundColor: ['#f49097 ', '#dfb2f4', '#f5e960',
+              '#55d6c2', '#b4d9ef', '#adf7b6'],
+          borderWidth: 1,
+          hoverBorderColor: "black",
+          hoverBorderWidth: 2,
+          hoverBackgroundColor: 'rgba(154, 245, 140)',
+          pointHoverRadius: 5
+      }],
+          },
+      options: {
+              title: {
+                  display: true,
+                      text: "Výdaje",
+                          fontSize: 20,
+          },
+              legend: {
+                  position: "top",
+                      labels: {
+                      fontColor: "gray"
+                  },
+                  display: false,
+          },
+
+              elements: {
+                  hitRadius: 3,
+          }
+          }
+      })
+
+
+
+      over_time_expenditure = JSON.parse({{over_time_expenditure | tojson}})
+      labels = JSON.parse({{ dates_label  | tojson}})
+
+      new Chart(document.getElementById("overtime_expenditure"), {
+              type: "line",
+              data:
+              {
+                  labels: labels,
+                  datasets: [{
+                      label: "Expenditure Over Time",
+                      
+                      data: over_time_expenditure,
+                      fill: false,
+                      borderColor: "orange",
+                      lineTension: 0.1
+                  }]
+              },
+              options: {}
+          });
+
+</script>
+{% endblock %} {% endblock %}

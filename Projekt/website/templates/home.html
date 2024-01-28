@@ -1,0 +1,166 @@
+{% extends "base.html" %} {% block title %}onBudget{% endblock %} {% block
+content%}
+
+<br />
+
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="d-flex flex-row widget summary income">
+      <div class="d-flex flex-column justify-content-center p-5">
+        <i class="fa-solid fa-coins fa-2xl"></i>
+      </div>
+      <div class="d-flex flex-column m-auto py-3">
+        <span class="lead">Príjmy</span>
+        <a  href="/charts#prijmyView">{{totalIncome}} €</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-4">
+    <div class="d-flex flex-row widget summary expense">
+      <div class="d-flex flex-column justify-content-center p-5">
+        <i class="fa-solid fa-receipt fa-2xl"></i>
+      </div>
+      <div class="d-flex flex-column m-auto py-3">
+        <span class="lead">Výdaje</span>
+        <a  href="/charts">{{totalExpense}} €</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="d-flex flex-row widget summary balance">
+      <div class="d-flex flex-column justify-content-center p-5">
+        <i class="fa-solid fa-piggy-bank fa-2xl"></i>
+      </div>
+      <div class="d-flex flex-column m-auto py-3">
+        <span class="lead">Zostatok</span>
+        {% if balance[0]=="-" %}
+        <h1 class="red">{{balance}} €</h1>
+        {% else %}
+        <h1 class="green">{{balance}} €</h1>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br><br>
+<br>
+
+<!--pridanie grafov-->
+
+      <div class="homeCharts">
+          <div class="chart-container left" style="position: relative;">
+              <canvas id="income_vs_expense"></canvas>
+          </div>
+    
+          <div class="chart-container right" style="position: relative;">
+              <canvas id="overtime_expenditure"></canvas>
+          </div>
+
+          
+
+
+          
+        
+      </div>
+
+
+
+
+
+{% block javascript %}
+<script>
+  let income_vs_expense_data = JSON.parse({{ income_vs_expense | tojson }})
+
+  let prijem_vydaj_labely = JSON.parse({{ prijem_vydaj_labels | tojson }})
+  let income_category_data = JSON.parse({{ income_category | tojson}})
+
+  let cat_labels_from_db = JSON.parse({{ cats_labels | tojson}})
+
+  let expense_cat_labels_from_db = JSON.parse({{ expense_cats_labels | tojson }})
+  let expense_category_data = JSON.parse({{ expense_category | tojson }})
+
+  
+  Chart.scaleService.updateScaleDefaults('linear', {
+            ticks: {
+                min: 0,
+               
+            }
+    });
+
+    
+
+  let income_vs_expense_chart = new Chart(income_vs_expense, {
+          type: 'pie',
+          data: {
+        
+          labels: prijem_vydaj_labely,
+              datasets: [{
+                  label: "Income Vs Expenses",
+                  data: income_vs_expense_data,
+                  backgroundColor: ['#59c9b7 ', '#FAA43A', '#60BD68',
+                      '#B276B2', '#E16851', '#FB8267'],
+
+                     
+                  borderWidth: 1,
+                  hoverBorderColor: "black",
+                  hoverBorderWidth: 2,
+                  hoverBackgroundColor: 'rgba(154, 245, 140)',
+                  pointHoverRadius: 5
+              }],
+          },
+          options: {
+                  title: {
+                      display: true,
+                          text: "Príjmy vs Výdaje",
+                              fontSize: 20,
+                                
+                  },
+                  legend: {
+                      position: "right",
+                          labels: {
+                          fontColor: "gray"
+                      },
+                      display: true,
+                  },
+
+                  elements: {
+                      hitRadius: 3,
+                  }
+          }
+      })
+
+ 
+
+
+
+    
+
+      over_time_expenditure = JSON.parse({{over_time_expenditure | tojson}})
+      labels = JSON.parse({{ dates_label  | tojson}})
+
+      new Chart(document.getElementById("overtime_expenditure"), {
+              type: "line",
+              data:
+              {
+                  labels: labels,
+                  datasets: [{
+                      label: "Prehľad transakcií",
+                      
+                      data: over_time_expenditure,
+                      fill: false,
+                      borderColor: "orange",
+                      lineTension: 0.1
+                  }]
+              },
+              options: {}
+          });
+</script>
+{% endblock%}
+
+{% endblock %}

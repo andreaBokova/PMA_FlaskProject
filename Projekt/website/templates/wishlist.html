@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block title %}Wishlist{% endblock %} {% block
+content %}
+<br />
+<div class="col-xs-10 col-sm-6 col-md-6 ml-auto mr-auto">
+  <div class="card card-style mb-2 wishlist-card">
+    <div class="card-body">
+      <div class="form-group">
+        <legend class="mb-4">Wishlist</legend>
+        <br />
+
+        <ul class="list-group list-group-flush" id="notes">
+          {% for note in user.notes %}
+          <li class="list-group-item">
+            {{ note.data }}
+            <button
+              type="button"
+              class="close"
+              onClick="deleteNote({{ note.id }})"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </li>
+          {% endfor %}
+        </ul>
+        <form method="POST">
+          <textarea name="note" id="note" class="form-control"></textarea>
+          <br />
+          <div text-align="center">
+            <button type="submit" class="wishlist-button">Pridať</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br /><br />
+
+{% endblock %}

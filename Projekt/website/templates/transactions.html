@@ -1,0 +1,214 @@
+{% extends "base.html" %} {% block title %}Transakcie{% endblock %} {% block
+content%}
+
+<br />
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <style>
+      .table-responsive {
+        border-radius: 20px;
+        height: 500px;
+        overflow: hidden;
+      }
+      .table-wrapper {
+        min-width: 100px;
+        background: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+      }
+      .table-title {
+        padding-bottom: 10px;
+        margin: 0 0 10px;
+      }
+      .table-title h2 {
+        margin: 8px 0 0;
+        font-size: 22px;
+      }
+
+      .add-button {
+        position: relative;
+        float: right;
+        font-size: 30px;
+        color: #50cab5e3;
+      }
+
+      .add-button:hover,
+      .table td a.edit:hover,
+      .table td a.delete:hover {
+        color: rgb(100, 224, 211);
+      }
+      .search-box {
+        position: relative;
+        float: right;
+      }
+      .search-box input {
+        height: 34px;
+        border-radius: 20px;
+        padding-left: 35px;
+        border-color: #ddd;
+
+        box-shadow: none;
+      }
+      .search-box input:focus {
+        border-color: #3fbae4;
+      }
+      .search-box i {
+        color: #a0a5b1;
+        position: absolute;
+        font-size: 19px;
+        top: 8px;
+        left: 10px;
+      }
+      table.table tr th,
+      table.table tr td {
+        border-color: #a6d3cc71;
+      }
+      table.table-striped tbody tr:nth-of-type(odd) {
+        background-color: #fcfcfc;
+      }
+      table.table-striped.table-hover tbody tr:hover {
+        background-color: #65b9ab2a;
+      }
+      table.table th i {
+        font-size: 13px;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+      table.table td:last-child {
+        width: 100px;
+      }
+      table.table td a {
+        color: #a0a5b1;
+        display: inline-block;
+        margin: 0 5px;
+      }
+
+      table.table td a.edit {
+        color: #50cab5e3;
+      }
+      table.table td a.delete {
+        color: #50cab5e3;
+      }
+      table.table td i {
+        font-size: 19px;
+      }
+
+      .table {
+        line-height: 17px;
+      }
+
+      .scrollable-table {
+        overflow: hidden;
+
+        overflow-y: scroll;
+        height: 410px;
+
+        border: 1px solid rgba(128, 128, 128, 0.198);
+      }
+
+      .transaction-type {
+        float: right;
+        text-align: center;
+        width: 80px;
+        padding: 5px 10px;
+        border-radius: 15px;
+      }
+
+      .transaction-type.income {
+        background-color: #77dd773f;
+      }
+
+      .transaction-type.expense {
+        background-color: #ff6d6a46;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm"><h2>Transakcie</h2></div>
+            <div class="col-sm">
+              <div>
+                <a href="/addTransaction"
+                  ><i class="fa-sharp fa-solid fa-circle-plus add-button"></i
+                ></a>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        <div class="scrollable-table">
+          <table class="table table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Kategória</th>
+
+                <th>Dátum</th>
+
+                <th>Suma</th>
+
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for entry in entries %}
+              <tr>
+               
+
+                <td>
+                  {% if entry.type == 'výdaj' %} {{ entry.category }}<span
+                    class="transaction-type expense"
+                    >{{entry.type}}</span
+                  >
+                  {% else %} {{ entry.category }}<span
+                    class="transaction-type income"
+                    >{{entry.type}}</span
+                  >
+                  {% endif %}
+                </td>
+
+                <td>{{entry.date.strftime("%d-%m-%Y")}}</td>
+
+                {% if entry.type == 'výdaj' %}
+                <td>-{{ entry.amount }} €</td>
+                {% else %}
+                <td>+{{ entry.amount }} €</td>
+                {% endif %}
+                <td>
+                  <a
+                    href="/editTransaction/{{ entry.id }}"
+                    class="edit"
+                    title="Edit"
+                    ><i class="fa-solid fa-pen"></i
+                  ></a>
+                  <a
+                    href="{{ url_for('views.delete', id = entry.id) }}"
+                    class="delete"
+                    title="Delete"
+                    ><i class="fa-solid fa-trash-can-arrow-up"></i
+                  ></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+  </body>
+</html>
+
+{% endblock %}
